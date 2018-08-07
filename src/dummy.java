@@ -9,6 +9,7 @@ public class dummy extends ConsoleProgram{
 	
 	public void run() {
 		
+		/*	READ FILES
 		try {
 			String n, m="practical";
 			int sum =0, counter=0;
@@ -17,7 +18,7 @@ public class dummy extends ConsoleProgram{
 
 				while(input.hasNextLine()) {
 					n = input.nextLine();
-					println(n);
+					//println(n);
 				}
 				
 				input.close();
@@ -26,6 +27,34 @@ public class dummy extends ConsoleProgram{
 			println("File Not Found.");
 			e.printStackTrace();
 		}
+		*/
+		
+		/*CHAR VALIDATION
+		
+		String in = readLine("? ");
+		print(in);
+		char c = in.charAt(0);
+		c = Character.toUpperCase(c);
+
+		
+		while(in.length()!=1 || (c<'A' || c>'Z'))
+			{
+			if(in.length()!=1)
+				println("Please Enter EXACTLY ONE character: ");
+			if(c<'A' || c>'Z')
+				println("Pleeeeease enter a CHARACTER: ");
+			
+			in = readLine("?");
+			c = in.charAt(0);
+			c = Character.toUpperCase(c);
+			}
+		*/
+		
+		String in = "";
+
+		println(in.indexOf('c'));
+		
+
 		
 	}
 }

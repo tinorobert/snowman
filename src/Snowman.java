@@ -8,7 +8,7 @@ import java.util.*;  // for Scanner
 public class Snowman extends SnowmanProgram {
 	
 	public void run() {
-		String word;
+		String word="";
 		
 		intro();
 		//word = "army";
@@ -48,7 +48,15 @@ public class Snowman extends SnowmanProgram {
 	
 	// TODO: comment this method
 	private void intro() {
-		// TODO: write this method
+		println("CS 106A Snowman!");
+		println("I will think of a random word.");
+		println("You'll try to guess its letters.");
+		println("Every time you guess a letter");
+		println("that isn't in my word, a new");
+		println("piece of the snowman appears.");
+		println("Guess correctly to avoid");
+		println("bringing him to life in the sun!");
+		println("");
 	}
 	
 	// TODO: comment this method
@@ -66,7 +74,8 @@ public class Snowman extends SnowmanProgram {
 		
 		while(count>0) {
 			
-			guessedLetters = guessedLetters + readLine("Your guess? ");
+			guessedLetters = guessedLetters + readGuess(guessedLetters);
+			
 			correct = createHint(secretWord, guessedLetters);
 			if(correct=="win")
 				break;
@@ -197,10 +206,31 @@ public class Snowman extends SnowmanProgram {
 	// TODO: comment this method
 	private char readGuess(String guessedLetters) {
 
-		guessedLetters += guessedLetters + readLine("guess: ");
+		
+		String in = readLine("? ");
+		print(in);
+		char c = in.charAt(0);
+		c = Character.toUpperCase(c);
+		int repeat = guessedLetters.indexOf(c);
+		
+		while(in.length()!=1 || (c<'A' || c>'Z') || repeat!=-1)
+			{
+			if(in.length()!=1)
+				println("Please Enter EXACTLY ONE character: ");
+			else if(c<'A' || c>'Z')
+				println("Pleeeeease enter a CHARACTER: ");
+			else //if((c<'A' || c>'Z') && repeat!=-1)
+				println("You ALREADY enetered that character. Enter a NEW character: ");
+			
+			in = readLine("?");
+			c = in.charAt(0);
+			c = Character.toUpperCase(c);
+			repeat = guessedLetters.indexOf(c);
+
+			}
 		
 		
-		return '?';
+		return c;
 	}
 	
 	// TODO: comment this method
