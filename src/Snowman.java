@@ -8,45 +8,25 @@ import java.util.*;  // for Scanner
 public class Snowman extends SnowmanProgram {
 	
 	public void run() {
-		String word="";
+		String word="", filename;
+		int gameWon;
+		boolean rep=true;
 		
 		intro();
-		//word = "army";
-		try {
-			String n;
-			int index =0, counter=0;
-
-				Scanner input = new Scanner(new File("res/small.txt"));
-
-				while(input.hasNextLine()) {
-					input.nextLine();
-					counter++;
-					//println(counter);
-				}
-				input.close();
-
-				input = new Scanner(new File("res/small.txt"));
-				index = RandomGenerator.getInstance().nextInt(2,counter);
-				print(index);
-				for(int i=0; i<index; i++)
-					{
-					word = input.nextLine();
-				}
-				
-				println(word);
-				
-				input.close();
-			
-
-		} catch (FileNotFoundException e){
-			println("File Not Found.");
-			e.printStackTrace();
-		}
 		
-		int a = playOneGame(word);
+		filename = "res/small.txt";
+		
+		while(rep==true)
+		{
+			word = getRandomWord(filename);
+			gameWon = playOneGame(word);
+			
+			println("Result is:" + gameWon);
+			readBoolean("Wanna play again? (y/n):","y","n");
+		}
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private void intro() {
 		println("CS 106A Snowman!");
 		println("I will think of a random word.");
@@ -59,7 +39,7 @@ public class Snowman extends SnowmanProgram {
 		println("");
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private int playOneGame(String secretWord) {
 		String guessedLetters="", correct="";
 		int count = 8;
@@ -78,7 +58,7 @@ public class Snowman extends SnowmanProgram {
 			
 			correct = createHint(secretWord, guessedLetters);
 			if(correct=="win")
-				break;
+				return 1;
 			//println("");
 			print("Your guesses:");
 			for(int i=0; i<guessedLetters.length(); i++)
@@ -100,6 +80,7 @@ public class Snowman extends SnowmanProgram {
 		{
 			println("You Lost!");
 			displaySnowman(8);
+			return 0;
 
 		}
 		
@@ -107,7 +88,7 @@ public class Snowman extends SnowmanProgram {
 	}
 	
 	
-	// DONE TODO: comment this method
+	// DONE: comment this method
 	private String createHint(String secretWord, String guessedLetters) {
 		
 		int lword, lguess, index;
@@ -203,7 +184,7 @@ public class Snowman extends SnowmanProgram {
 		
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private char readGuess(String guessedLetters) {
 
 		
@@ -233,7 +214,7 @@ public class Snowman extends SnowmanProgram {
 		return c;
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private void displaySnowman(int guessCount) {
 		// TODO: write this method
 		try {
@@ -264,9 +245,42 @@ public class Snowman extends SnowmanProgram {
 		// TODO: write this method
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private String getRandomWord(String filename) {
 		// TODO: write this method
-		return "";
+		String n, word="";
+		int index =0, counter=0;
+		
+		try {
+			
+
+				Scanner input = new Scanner(new File(filename));
+
+				while(input.hasNextLine()) {
+					input.nextLine();
+					counter++;
+					//println(counter);
+				}
+				input.close();
+
+				input = new Scanner(new File(filename));
+				index = RandomGenerator.getInstance().nextInt(2,counter);
+				print(index);
+				for(int i=0; i<index; i++)
+					{
+					word = input.nextLine();
+				}
+				
+				println(word);
+				
+				input.close();
+			
+
+		} catch (FileNotFoundException e){
+			println("File Not Found.");
+			e.printStackTrace();
+		}
+		
+		return word;
 	}
 }
