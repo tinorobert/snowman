@@ -9,7 +9,7 @@ public class Snowman extends SnowmanProgram {
 	
 	public void run() {
 		String word="", filename;
-		int gameWon;
+		int gameWon, gamesCount=0, gamesWon=0 ,best=-1,temp;
 		boolean rep=true;
 		
 		intro();
@@ -20,10 +20,23 @@ public class Snowman extends SnowmanProgram {
 		{
 			word = getRandomWord(filename);
 			gameWon = playOneGame(word);
-			
+			gamesCount++;
+			if(gameWon!=0)
+			{
+				gamesWon++;
+				temp = gameWon - 1000;
+				if (temp > best)
+					best = temp;
+			}
 			println("Result is:" + gameWon);
-			readBoolean("Wanna play again? (y/n):","y","n");
+			
+			
+			rep = readBoolean("Wanna play again? (y/n):","y","n");
+			
 		}
+		
+		stats(gamesCount, gamesWon, best);
+		
 	}
 	
 	// DONE: comment this method
@@ -58,7 +71,7 @@ public class Snowman extends SnowmanProgram {
 			
 			correct = createHint(secretWord, guessedLetters);
 			if(correct=="win")
-				return 1;
+				return count+999;
 			//println("");
 			print("Your guesses:");
 			for(int i=0; i<guessedLetters.length(); i++)
@@ -240,9 +253,24 @@ public class Snowman extends SnowmanProgram {
 		}		
 	}
 	
-	// TODO: comment this method
+	// DONE: comment this method
 	private void stats(int gamesCount, int gamesWon, int best) {
 		// TODO: write this method
+		double rate= 100.0*gamesWon/gamesCount;
+		
+		println();
+		println("*******************");
+		println("Overall statistics:");
+		println("Games played: " + gamesCount);
+		println("Games won: " + gamesWon);
+		println("Win percent: " + rate + "%");
+		if (best!=-1)
+			println("Best game: " + best + " guess(es) remaining");
+		
+		println("Thanks for playing!");
+		println("*******************");
+
+		
 	}
 	
 	// DONE: comment this method
