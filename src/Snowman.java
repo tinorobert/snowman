@@ -8,14 +8,39 @@ import java.util.*;  // for Scanner
 public class Snowman extends SnowmanProgram {
 	
 	public void run() {
-		String word="", filename;
+		String word="", filename="";
 		int gameWon, gamesCount=0, gamesWon=0 ,best=-1,temp;
 		boolean rep=true;
+		int option;
 		
 		intro();
 		
-		filename = "res/small.txt";
+		option = readInt("Please enter option number");
+		while(option>5 && option <1)
+			{
+			println("Options must be between 1 and 5");
+			//println("Please enter option again");
+			option = readInt("Please enter option number");
+		}
 		
+		switch(option) { 
+		case 1:
+			filename = "res/oneword.txt";
+			break;
+		case 2:
+			filename="res/twowords.txt";
+			break;
+		case 3:
+			filename="res/small.txt";
+			break;
+		case 4:
+			filename="res/dict.txt";
+			break;
+		case 5:
+			filename="res/large.txt";
+			break;
+		}
+				
 		while(rep==true)
 		{
 			word = getRandomWord(filename);
@@ -39,7 +64,7 @@ public class Snowman extends SnowmanProgram {
 		
 	}
 	
-	// DONE: comment this method
+	// DONE: Contains welcome banner and dictionary options
 	private void intro() {
 		println("CS 106A Snowman!");
 		println("I will think of a random word.");
@@ -50,9 +75,21 @@ public class Snowman extends SnowmanProgram {
 		println("Guess correctly to avoid");
 		println("bringing him to life in the sun!");
 		println("");
+		
+		println("Chose a Dictionary size:");
+		println("1) very very small (1 word)");
+		println("2) very small (2 words)");
+		println("3) small (5 words)");
+		println("4) medium (73 words)");
+		println("5) large (121,806 words)");
+		
+		
+		
 	}
 	
-	// DONE: comment this method
+	// DONE: Returns: 
+	// Won game: number of guesses left + 1000
+	// Lost game: 0
 	private int playOneGame(String secretWord) {
 		String guessedLetters="", correct="";
 		int count = 8;
@@ -101,7 +138,8 @@ public class Snowman extends SnowmanProgram {
 	}
 	
 	
-	// DONE: comment this method
+	// DONE: Creates hints and returns flag of wheter the word has been 
+	// guessed (correct) or not (incorrect)
 	private String createHint(String secretWord, String guessedLetters) {
 		
 		int lword, lguess, index;
@@ -197,7 +235,7 @@ public class Snowman extends SnowmanProgram {
 		
 	}
 	
-	// DONE: comment this method
+	// DONE: Reads and validates guesses
 	private char readGuess(String guessedLetters) {
 
 		
@@ -227,7 +265,7 @@ public class Snowman extends SnowmanProgram {
 		return c;
 	}
 	
-	// DONE: comment this method
+	// DONE: Displays snowman in 9 stages
 	private void displaySnowman(int guessCount) {
 		// TODO: write this method
 		try {
@@ -253,7 +291,7 @@ public class Snowman extends SnowmanProgram {
 		}		
 	}
 	
-	// DONE: comment this method
+	// DONE: Show stats after the session is over
 	private void stats(int gamesCount, int gamesWon, int best) {
 		// TODO: write this method
 		double rate= 100.0*gamesWon/gamesCount;
@@ -273,7 +311,7 @@ public class Snowman extends SnowmanProgram {
 		
 	}
 	
-	// DONE: comment this method
+	// DONE: Return a random word from the dictionary files
 	private String getRandomWord(String filename) {
 		// TODO: write this method
 		String n, word="";
@@ -312,3 +350,5 @@ public class Snowman extends SnowmanProgram {
 		return word;
 	}
 }
+
+	// That's It!!
